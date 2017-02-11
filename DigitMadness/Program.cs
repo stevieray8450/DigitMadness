@@ -8,26 +8,28 @@ namespace DigitMadness
 {
     class Program
     {
-        public static void digPow(int n, int p)
+        public static long digPow(int n, int p)
         {
             List<int> intList = new List<int>();
 
-            while (n != 0)
+            int stepper = n;
+            while (stepper != 0)
             {
-                int lastDigit = n % 10;
+                int lastDigit = stepper % 10;
                 intList.Add(lastDigit);
-                n /= 10;
+                stepper /= 10;
             }
 
             intList.Reverse();
 
-            ////testing only
-            //foreach(int item in intList)
-            //{
-            //    Console.Write(item.ToString());
-            //}
-            //Console.WriteLine();
-            //Console.WriteLine("************");
+            // testing only
+            foreach (int item in intList)
+            {
+                Console.Write(item.ToString());
+            }
+
+            Console.WriteLine();
+            Console.WriteLine("************");
 
             List<double> expoList = new List<double>();
             List<double> doubleList = new List<double>();
@@ -35,8 +37,6 @@ namespace DigitMadness
             foreach(int item in intList)
             {
                 doubleList.Add(Convert.ToDouble(item));
-                //expoList.Add(Math.Pow(item, p));
-                //p++;
             }
 
             foreach(double item in doubleList)
@@ -45,17 +45,41 @@ namespace DigitMadness
                 p++;
             }
 
-            ////testing only
-            //foreach (double item in expoList)
-            //{
-            //    Console.WriteLine(item.ToString());
-            //}
-        
+            //testing only
+            foreach (double item in expoList)
+
+            {
+                Console.WriteLine(item.ToString());
+            }
+
+            //sums up all expoList items
+            double sumList = 0;
+            foreach(double item in expoList)
+            {
+                sumList += item;
+            }
+
+            //testing only
+            Console.WriteLine("*****************");
+            Console.WriteLine(sumList.ToString());
+
+            long longSumList = Convert.ToInt64(sumList);
+
+            long k = longSumList / n;
+
+            if (longSumList % n != 0)
+            {
+                return -1;
+            }
+            else
+            {
+                return k;
+            }
         }
         static void Main(string[] args)
         {
-            digPow(44, 2);
-
+           long poop = digPow(91, 3);
+           Console.WriteLine(poop.ToString());
         }
     }
 }
